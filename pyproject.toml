@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "dogma"
+author = "Griffin Clausen"
+author-email = "griffinclausen@gmail.com"
+home-page = "https://github.com/griffinclausen/dogma"
+classifiers = ["License :: OSI Approved :: MIT License"]
+
