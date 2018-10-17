@@ -1,3 +1,8 @@
+"Collection of objects related by the central dogma of biology."
+__version__ = '1.0'
+name = 'dogma'
+
+
 from dogma.nbci import (
     NBCI_GENETIC_CODE_NAMES,
     NCBI_NUCLEOTIDES,
@@ -59,5 +64,3 @@ from dogma.proteins import (
     Protein,
     calculate_protein_degeneracy
 )
-
-name = 'dogma'
