@@ -1,15 +1,13 @@
-from collections import OrderedDict, defaultdict
 from random import choices
 
-from dogma import(rescale,
-                  get_frequency_dictionary,
-
-                  STANDARD_NUCLEOTIDES,
-                  DEFAULT_NUCLEOTIDE_LABEL,
-                  DEGENERATE_NUCLEOTIDE_CODE,
-                  DEGENERATE_NUCLEOTIDES,
-                  DEGENERATE_NUCLEOTIDE_CODE_COMPOSITION,
-                  DEGENERATE_NUCLEOTIDE_CODE_REVERSED,)
+from doe import (
+    rescale,
+    STANDARD_NUCLEOTIDES,
+    DEFAULT_NUCLEOTIDE_LABEL,
+    DEGENERATE_NUCLEOTIDES,
+    DEGENERATE_NUCLEOTIDE_CODE_COMPOSITION,
+    DEGENERATE_NUCLEOTIDE_CODE_REVERSED
+)
 
 
 class Nucleotide:
@@ -47,7 +45,6 @@ class Nucleotide:
         a.equimolar --> True
     a = Nucleotide({'A':1})
 
-
     n = Nucleotide('N')
         a.label --> 'N'
         a.composition --> {'A':1, 'C':1, 'G':1, 'T':1}
@@ -67,7 +64,8 @@ class Nucleotide:
 
     def __init__(self, data=None):
 
-        # define self.label and self.composition by processing data input parameter
+        # define self.label and self.composition by processing
+        # data input parameter
         self._process_input(data)
 
         self.members = self.get_members()
@@ -75,7 +73,6 @@ class Nucleotide:
 
         self.degenerate = self.is_degenerate()
         self.equimolar = self.is_equimolar()
-
 
     def _process_input(self, data):
         """
@@ -89,11 +86,11 @@ class Nucleotide:
 
             label = data.upper().replace('U', 'T')
             composition = DEGENERATE_NUCLEOTIDE_CODE_COMPOSITION[label]
-        
+
         # ex: Nucleotide({'A':3, 'C':1})
         elif (isinstance(data, dict) and
-              is_valid_nucleotide_string(''.join(data.keys())) and 
-              all([isinstance(_, (int, float)) for _ in data.values()])):
+                is_valid_nucleotide_string(''.join(data.keys())) and
+                all([isinstance(_, (int, float)) for _ in data.values()])):
 
             composition = data
             label = nucleotide_composition_to_letter(composition)
@@ -102,10 +99,8 @@ class Nucleotide:
             label = DEFAULT_NUCLEOTIDE_LABEL
             composition = DEGENERATE_NUCLEOTIDE_CODE_COMPOSITION[label]
 
-
         self.label = label
         self.composition = composition
-
 
     def get_members(self):
         """
@@ -115,28 +110,26 @@ class Nucleotide:
         nonzero_members = [k for k, v in self.composition.items() if v > 0]
         return ''.join(sorted(nonzero_members))
 
-
     def get_proportions(self):
         """
         Returns a list of proportions aligned with self.members
         """
         return [self.composition[_] for _ in self.members]
 
-
     def is_degenerate(self):
         """
-        Nucleotide is degenerate if multiple standard nucleotides have nonzero proportions.
+        Nucleotide is degenerate if multiple standard nucleotides
+        have nonzero proportions.
         """
         return len(self.members) > 1
 
-
     def is_equimolar(self):
         """
-        Nucleotide is equimolar if the proportion of each nonzero nucleotide values are equal.
+        Nucleotide is equimolar if the proportion of each nonzero nucleotide
+        values are equal.
         """
         nonzero_values = [_ for _ in self.composition.values() if _ > 0]
         return max(nonzero_values) == min(nonzero_values)
-
 
     def samples(self, k=1):
         """
@@ -144,24 +137,22 @@ class Nucleotide:
         """
         return [self.sample() for _ in range(k)]
 
-
     def sample(self):
         """
         Randomly selects a members based on Nucleotide composition.
         """
         return choices(self.members, self.proportions)[0]
 
-
     def copy(self):
         return Nucleotide(self.composition)
 
-
     def __str__(self):
-        return f'Nucleotide(label={self.label}, composition={self.composition})'
-
+        return f'Nucleotide(label={self.label}, '\
+               f'composition={self.composition})'
 
     def __repr__(self):
-        return f'Nucleotide(label={self.label}, composition={self.composition})'
+        return f'Nucleotide(label={self.label}, '\
+               f'composition={self.composition})'
 
 
 def is_nondegenerate_nucleotide_string(n):
@@ -198,14 +189,16 @@ def combine_nucleotides(*nucleotides, proportions=None):
     t = Nucleotide('T')
 
     c_plus_t = combine_nucleotides(c, t)
-    print(c_plus_t) --> "Nucleotide('N', composition={'A':0, 'C':0.5, 'G':0, 'T':0.5})" 
+    print(c_plus_t) --> "Nucleotide('N', " \
+                        "composition={'A':0, 'C':0.5, 'G':0, 'T':0.5})"
 
-    c_plus_ttt = combine_nucleotides(c, t, proportions=[1, 3])
-    print(c_plus_ttt) --> "Nucleotide('n', composition={'A':0, 'C':0.25, 'G':0, 'T':0.75})" 
+""    c_plus_ttt = combine_nucleotides(c, t, proportions=[1, 3])
+    print(c_plus_ttt) --> "Nucleotide('n', "\
+                          "composition={'A':0, 'C':0.25, 'G':0, 'T':0.75})"
     """
 
     if (proportions is None) or (len(nucleotides) != len(proportions)):
-        proportions = [1,] * len(nucleotides)
+        proportions = [1, ] * len(nucleotides)
 
     data = {}
     for n in STANDARD_NUCLEOTIDES:
@@ -217,7 +210,8 @@ def combine_nucleotides(*nucleotides, proportions=None):
 
 def nucleotide_composition_to_letter(composition):
     """
-    Converts dictionary of {nucleotide letter: proportions} pairs to IUPAC degenerate DNA letter.
+    Converts dictionary of {nucleotide letter: proportions} pairs
+    to IUPAC degenerate DNA letter.
 
     Usage:
     c = {'A': 1}
@@ -230,11 +224,14 @@ def nucleotide_composition_to_letter(composition):
     print(nucleotide_composition_to_letter(c)) --> 'n'
     """
 
-    nonzero_nucleotides = ''.join(sorted([n for n, v in composition.items() if v > 0]))
+    nonzero_nucleotides = ''.join(sorted([n
+                                          for n, v in composition.items()
+                                          if v > 0]))
     nonzero_proportions = [composition[n] for n in nonzero_nucleotides]
     equimolar = min(nonzero_proportions) == max(nonzero_proportions)
 
-    letter = DEGENERATE_NUCLEOTIDE_CODE_REVERSED.get(nonzero_nucleotides, DEFAULT_NUCLEOTIDE_LABEL)
+    letter = DEGENERATE_NUCLEOTIDE_CODE_REVERSED.get(nonzero_nucleotides,
+                                                     DEFAULT_NUCLEOTIDE_LABEL)
 
     if equimolar:
         return letter

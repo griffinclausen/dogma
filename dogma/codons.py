@@ -3,24 +3,18 @@ from collections import defaultdict
 import decimal
 from random import choices
 
-from dogma import (
+from doe import (
     DEFAULT_DECIMAL_PRECISION,
-
     GeneticCode,
     DEFAULT_GENETIC_CODE,
-
     Nucleotide,
-    STANDARD_NUCLEOTIDES,
-    DEGENERATE_NUCLEOTIDES,
     DEGENERATE_NUCLEOTIDE_CODE,
     DEGENERATE_NUCLEOTIDE_CODE_REVERSED,
     is_valid_nucleotide_string,
     combine_nucleotides,
-
     STANDARD_CODONS,
-    DEGENERATE_CODONS,
-    DEFAULT_CODON_LABEL)
-
+    DEFAULT_CODON_LABEL
+)
 
 decimal.getcontext().prec = DEFAULT_DECIMAL_PRECISION
 
@@ -41,13 +35,12 @@ class Codon:
             genetic_code = DEFAULT_GENETIC_CODE
         self.genetic_code = genetic_code
 
-
         # aaa = Codon('AAA')
         # naa = Codon('NAA')
         # Xaa = combine_codons(aaa, naa)  # is dict
         # Codon(Xaa)
         if (isinstance(data, dict) and
-            all([_ in STANDARD_CODONS for _ in data])):
+                all([_ in STANDARD_CODONS for _ in data])):
 
             self.bases = None
             self.label = DEFAULT_CODON_LABEL
@@ -56,9 +49,9 @@ class Codon:
 
         # Codon(['AAA', 'GGG'])
         elif (isinstance(data, list) and
-              all([isinstance(_, str) for _ in data]) and
-              all([len(_)==3 for _ in data]) and
-              all([_ in STANDARD_CODONS for _ in data])):
+                all([isinstance(_, str) for _ in data]) and
+                all([len(_) == 3 for _ in data]) and
+                all([_ in STANDARD_CODONS for _ in data])):
 
             self.bases = None
             self.label = DEFAULT_CODON_LABEL
@@ -67,26 +60,27 @@ class Codon:
 
         # Codon('AAA') or Codon('NNK') or ...
         # Codon([Nucleotide('A'),]*3) or ...
-        # data as iterable of length 3 , or Nuc(), or parameters that generates valid Nuc()
+        # data as iterable of length 3 , or Nuc(),
+        # or parameters that generates valid Nuc()
         elif (isinstance(data, (str, list, tuple)) and
-              len(data)==3):
+                len(data) == 3):
 
-            self.bases = [_ if isinstance(_, Nucleotide) else Nucleotide(_) for _ in data]
+            self.bases = [_
+                          if isinstance(_, Nucleotide)
+                          else Nucleotide(_)
+                          for _ in data]
             self.label = ''.join([_.label for _ in self.bases])
             self.members = self.get_members()
             self.proportions = self.get_proportions()
-
 
         # Codon() --> Codon([Nucleotide(),]*3) or ...
         else:
             raise 'Error, Codon() parameters not valid'
 
-
         self.composition = dict(zip(self.members, self.proportions))
 
         self.degenerate = self.is_degenerate()
         self.equimolar = self.is_equimolar()
-
 
     def get_members(self):
         """
@@ -109,7 +103,8 @@ class Codon:
 
     def translate(self, dtype=None):
         """
-        Returns a dictionary mapping amino acids (as single-letter codes) with proportions
+        Returns a dictionary mapping amino acids (as single-letter codes)
+        with proportions.
         """
         data = defaultdict(float)
         for c, p in zip(self.members, self.proportions):
@@ -143,13 +138,15 @@ class Codon:
 
     def is_degenerate(self):
         """
-        Codon is degenerate if multiple nonzero standard codons in composition
+        Codon is degenerate if there are multiple nonzero standard codons
+        in composition.
         """
         return len(self.members) > 1
 
     def is_equimolar(self):
         """
-        Codon is equimolar if all nonzero standard codons in composition has equal abundance
+        Codon is equimolar if all nonzero standard codons in composition have
+        equal abundance.
         """
         return max(self.proportions) == min(self.proportions)
 
@@ -183,7 +180,7 @@ def combine_codons(*codons, proportions=None):
 
 def nucleotide_string_to_codons(s, output='Codon'):
     if is_valid_nucleotide_string(s):
-        codon_strings = [s[3*i:3*i+3] for i in range(len(s)//3)]
+        codon_strings = [s[3 * i:3 * i + 3] for i in range(len(s) // 3)]
 
         if output == 'Codon':
             return [Codon(*_) for _ in codon_strings]

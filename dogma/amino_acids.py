@@ -1,15 +1,8 @@
-from dogma import(
+from doe import (
     GeneticCode,
     DEFAULT_GENETIC_CODE,
-
     Codon,
-    STANDARD_CODONS,
-    DEGENERATE_CODONS,
-    degenerate_codon_string_to_standard_members,
-
-    STANDARD_AMINO_ACIDS,
-    DEFAULT_AMINO_ACID_LABEL,
-    STOP_LABEL)
+)
 
 
 class AminoAcid:
@@ -25,7 +18,8 @@ class AminoAcid:
 
         # input data is string of length 1, an amino acid letter
         # AminoAcid('A')
-        if (isinstance(data, str) and len(data) == 1):
+        if isinstance(data, str) and len(data) == 1:
+
             self.label = data
             self.members = [data]
             self.proportions = [1]
@@ -80,28 +74,23 @@ class AminoAcid:
 
     def is_degenerate(self):
         """
-        Amino acid is degenerate if multiple amino acid members are nonzero.
+        Amino acid is degenerate if there are multiple amino acid members
+        have nonzero composition values.
         """
         return len(self.members)
 
     def is_equimolar(self):
         """
-        Amino acid is equimolar if all nonzero amino acid members have equal
-        abundance.
+        Amino acid is equimolar if all nonzero amino acid members
+        have equal abundance.
         """
         return max(self.proportions) == min(self.proportions)
 
     def __str__(self):
+
         print(self.label)
         print(self.composition)
 
     def __repr__(self):
-        return f'AminoAcid(label={self.label}, composition={self.composition})'
-
-
-def main():
-    print(__name__)
-
-
-if __name__ == '__main__':
-    main()
+        l, c = self.label, self.composition
+        return f'AminoAcid(label="{l}", composition={c})'
