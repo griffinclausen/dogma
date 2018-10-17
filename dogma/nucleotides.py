@@ -1,6 +1,6 @@
 from random import choices
 
-from doe import (
+from dogma import (
     rescale,
     STANDARD_NUCLEOTIDES,
     DEFAULT_NUCLEOTIDE_LABEL,

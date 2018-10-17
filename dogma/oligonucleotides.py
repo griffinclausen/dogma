@@ -3,7 +3,7 @@ import math
 
 import pandas as pd
 
-from doe import (
+from dogma import (
     DEFAULT_DECIMAL_PRECISION,
     GeneticCode,
     DEFAULT_GENETIC_CODE,

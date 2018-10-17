@@ -3,7 +3,7 @@ from collections import defaultdict
 import decimal
 from random import choices
 
-from doe import (
+from dogma import (
     DEFAULT_DECIMAL_PRECISION,
     GeneticCode,
     DEFAULT_GENETIC_CODE,

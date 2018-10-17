@@ -1,5 +1,6 @@
 init:
 	pip install pipenv
+	pipenv sync
 	pipenv install --dev
 
 test:

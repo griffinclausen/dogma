@@ -1,4 +1,4 @@
-from doe import (
+from dogma import (
     NBCI_GENETIC_CODE_NAMES,
     NCBI_CODONS,
     NCBI_AMINO_ACIDS

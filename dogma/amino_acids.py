@@ -1,4 +1,4 @@
-from doe import (
+from dogma import (
     GeneticCode,
     DEFAULT_GENETIC_CODE,
     Codon,

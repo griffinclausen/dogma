@@ -1,7 +1,7 @@
 from functools import reduce
 from random import choices
 
-from doe import (
+from dogma import (
     GeneticCode,
     DEFAULT_GENETIC_CODE,
     Oligonucleotide,

@@ -1,11 +1,11 @@
-from doe.nbci import (
+from dogma.nbci import (
     NBCI_GENETIC_CODE_NAMES,
     NCBI_NUCLEOTIDES,
     NCBI_CODONS,
     NCBI_AMINO_ACIDS,
 )
 
-from doe.utils import (
+from dogma.utils import (
     DEFAULT_DECIMAL_PRECISION,
     STANDARD_NUCLEOTIDES,
     DEGENERATE_NUCLEOTIDE_CODE,
@@ -28,18 +28,18 @@ from doe.utils import (
     get_random_oligonucleotide
 )
 
-from doe.genetic_codes import (
+from dogma.genetic_codes import (
     GeneticCode,
     DEFAULT_GENETIC_CODE,
     translate)
 
-from doe.nucleotides import (
+from dogma.nucleotides import (
     Nucleotide,
     combine_nucleotides,
     is_valid_nucleotide_string
 )
 
-from doe.codons import (
+from dogma.codons import (
     Codon,
     degenerate_codon_string_to_standard_members,
     nucleotide_string_to_codons,
@@ -48,16 +48,16 @@ from doe.codons import (
     merge_codons
 )
 
-from doe.oligonucleotides import (
+from dogma.oligonucleotides import (
     Oligonucleotide,
     reverse_complement
 )
 
-from doe.amino_acids import AminoAcid
+from dogma.amino_acids import AminoAcid
 
-from doe.proteins import (
+from dogma.proteins import (
     Protein,
     calculate_protein_degeneracy
 )
 
-name = 'doe'
+name = 'dogma'
