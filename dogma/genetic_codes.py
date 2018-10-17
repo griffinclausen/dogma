@@ -173,8 +173,6 @@ class GeneticCode:
         """
         Returns string that would evaluate to an equivalent
         GeneticCode instance.
-
-        Omits error handling parameter.
         """
         codons = self.get_codons()
         amino_acids = self.get_amino_acids()

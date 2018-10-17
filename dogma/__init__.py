@@ -1,5 +1,5 @@
 "Collection of objects related by the central dogma of biology."
-__version__ = '1.0'
+__version__ = '0.0.1'
 name = 'dogma'
 
 
