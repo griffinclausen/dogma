@@ -7,6 +7,7 @@ name = "pypi"
 pandas = "*"
 
 [dev-packages]
+dogma = {editable = true, path = "."}
 
 [requires]
 python_version = "3.7"

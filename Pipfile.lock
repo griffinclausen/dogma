@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fba383031295c98ef4ac605996144102d686f2d38c5a20f33ee0bebae0713200"
+            "sha256": "a2c97f2add7af2f76dd6e93495181976477022dd9a8e8344aee3e33430537f39"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -97,5 +97,10 @@
             "version": "==1.11.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "dogma": {
+            "editable": true,
+            "path": "."
+        }
+    }
 }

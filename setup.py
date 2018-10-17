@@ -19,7 +19,7 @@ dependency_links = [x.strip().replace('git+', '')
                     for x in all_reqs if x.startswith('git+')]
 
 setup(
-    name='done',
+    name='dogma',
     version=__version__,
     description=DESCRIPTION,
     long_description=long_description,
