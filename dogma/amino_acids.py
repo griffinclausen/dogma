@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from dogma import (
     GeneticCode,
     DEFAULT_GENETIC_CODE,
@@ -6,6 +9,17 @@ from dogma import (
 
 
 class AminoAcid:
+    """
+    Amino acids are the building blocks of proteins.
+
+    Attributes
+    ++++++++++
+    label - str - One letter string label denoting acid acid identity
+    members - list - List of
+    Methods
+    +++++++
+
+    """
 
     def __init__(self,
                  data=None,

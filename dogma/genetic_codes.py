@@ -1,3 +1,19 @@
+#!/usr/bin/env python
+# ~*~# -*- coding: utf-8 -*-
+
+"""
+The genetic code defines the mapping between nucleic acids and amino acids.
+
+This module defines the GeneticCode object and related functions.
+
+Usage
+*****
+std = GeneticCode()  # standard genetic code
+std['AAA'] -> 'K'
+std['BAD_CODON'] -> '*' # stop symbol
+"""
+
+
 from dogma import (
     NBCI_GENETIC_CODE_NAMES,
     NCBI_CODONS,
@@ -187,6 +203,8 @@ SUPE = GeneticCode(updated_mappings={'TAG': 'Q'}, name='supE')
 def translate(dna, genetic_code=None):
     """
     Translates a DNA string into amino acid string.
+
+    RNA and lower-case strings accepted.
     """
     assert isinstance(dna, str)
 

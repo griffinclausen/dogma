@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from itertools import product
 from collections import defaultdict
 import decimal

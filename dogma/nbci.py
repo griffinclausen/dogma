@@ -1,10 +1,16 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
+Translation system information from NCBI.
+
 :Reference:
     Nomenclature for Incompletely Specified Bases in Nucleic Acid Sequences
     http://www.sbcs.qmul.ac.uk/iubmb/misc/naseq.html
 """
 
 from itertools import product
+
 
 # dictionary of NCBI genetic code ID numbers and full names
 NBCI_GENETIC_CODE_NAMES = {
