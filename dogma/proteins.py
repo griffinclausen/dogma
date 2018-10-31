@@ -46,7 +46,7 @@ class Protein:
             else:
                 self.residues = [AminoAcid(_, genetic_code) for _ in data]
                 self.codons = [a.get_synonymous_codons(Codon)
-                               for a in self.residue]
+                               for a in self.residues]
                 self.oligonucleotide = None
 
         # Protein(Oligonucleotide('NNK'))
