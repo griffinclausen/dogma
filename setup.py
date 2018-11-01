@@ -26,11 +26,11 @@ setup(
     url='https://github.com/griffinclausen/dogma',
     license='MIT',
     author='Griffin Clausen',
-    author_email='griffinclausen@gmail.com',
+    author_email='dogma_maintainer@gmail.com',
     keywords='',
     entry_points='''
         [console_scripts]
-        genetic_code=dogma.genetic_code:test
+        genetic_code=dogma.genetic_codes:test
     ''',
     packages=find_packages(exclude=['docs', 'tests*']),
     include_package_data=True,

@@ -1,21 +1,21 @@
 # dogma
 
-degenerate<br>
- oligonucleotide<br>
-  generation and<br>
-   mathematical<br>
-    assessment<br>
+<b>d</b>egenerate<br>
+<b>o</b>ligonucleotide<br>
+<b>g</b>eneration and<br>
+<b>m</b>athematical<br>
+<b>a</b>ssessment<br>
 
 
 # Installation
-## PyPi
+## Pipenv (or pip)
+	>> pipenv install dogma
     >> pip install dogma
 
-## Github
-    >> git clone
-    >> cd
-    >> setup.py .dogma
-
+## or Github
+    >> git clone https://github.com/griffinclausen/dogma.git
+    >> cd dogma
+    >> pipenv install .
 
 # Basic Usage
 ## Interactive Python session
@@ -26,12 +26,5 @@ degenerate<br>
     >> samples = oligo.samples(100)
     >> print(samples)
 
-## Launch GUI
-    >> dogma_gui
-
-## Launch dogma web application on localhost
-    >> dogma_app
-
-
 # Contact Information
-Griffin Clausen
+dogma_maintainer@gmail.com
