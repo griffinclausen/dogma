@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 pandas = "*"
+twine = "*"
+setuptools = "*"
+wheel = "*"
 
 [dev-packages]
 dogma = {editable = true, path = "."}

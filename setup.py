@@ -23,6 +23,7 @@ setup(
     version=__version__,
     description=DESCRIPTION,
     long_description=long_description,
+    url='https://github.com/griffinclausen/dogma',
     license='MIT',
     author='Griffin Clausen',
     author_email='griffinclausen@gmail.com',
