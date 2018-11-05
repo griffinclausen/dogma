@@ -101,7 +101,7 @@ def rescale(data, total=1):
 
     if isinstance(data, list):
         input_total = sum(data)
-        assert input_total != 0, 'Error in doe.rescale(), input_total == 0'
+        assert input_total != 0, 'Error in dogma.rescale(), input_total == 0'
 
         return [_ / input_total * total for _ in data]
 

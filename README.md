@@ -1,28 +1,28 @@
 # dogma
 
-<b>d</b>egenerate<br>
-<b>o</b>ligonucleotide<br>
-<b>g</b>eneration and<br>
-<b>m</b>athematical<br>
-<b>a</b>ssessment<br>
+Collection of object-oriented entities related by the central dogma of biology.
+
+**d**egenerate<br>
+**o**ligonucleotide<br>
+**g**eneration and<br>
+**m**athematical<br>
+**a**ssessment<br>
 
 
 # Installation
-## Pipenv (or pip)
-	>> pipenv install dogma
+## using Pipenv
+    >> pipenv install dogma
+## or using pip
     >> pip install dogma
-
 ## or Github
     >> git clone https://github.com/griffinclausen/dogma.git
     >> cd dogma
     >> pipenv install .
 
 # Basic Usage
-## Interactive Python session
-    >> import dogma
     >> from dogma import GeneticCode, Oligonucleotide
     >> supE = GeneticCode(1, {'TAG': 'Q'})
-    >> oligo = Oligonucleotide('NNK'*7, supE)
+    >> oligo = Oligonucleotide('NNK', supE)
     >> samples = oligo.samples(100)
     >> print(samples)
 

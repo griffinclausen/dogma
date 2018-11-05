@@ -10,6 +10,7 @@ from dogma import (
     translate,
     Nucleotide,
     Codon,
+    combine_nucleotides
 )
 
 
@@ -422,6 +423,39 @@ class Oligonucleotide:
 
     def __repr__(self):
         return f'Oligonucleotide({self.label})'
+
+
+def combine_oligonucleotides(*oligos, proportions=None, offsets=None):
+    """
+    Merges oligonucleotides by combining nucleotide compositions.
+    """
+    n = len(oligos)
+    m = max([_.length for _ in oligos])
+
+    if proportions is None:
+        proportions = [1] * n
+    else:
+        assert len(proportions) == n
+        assert all([isinstance(_, (int, float)) for _ in proportions])
+        assert all([0 <= _ for _ in proportions])
+
+    if offsets is None:
+        offsets = [0] * n
+    else:
+        assert len(offsets) == len(oligos)
+        assert all([isinstance(_, int) for _ in offsets])
+        assert all([0 <= _ <= m for _ in offsets])
+
+    nucs = []
+    for i in range(m):  # for each nucleotide position
+        ns = []
+        ps = []
+        for oligo, offset, proportion in zip(oligos, offsets, proportions):
+            if i >= offset and i < (offset + oligo.length):
+                ns.append(oligo.bases[i - offset])
+                ps.append(proportion)
+        nucs.append(combine_nucleotides(*ns, proportions=ps))
+    return Oligonucleotide(nucs)
 
 
 def reverse_complement(oligo):

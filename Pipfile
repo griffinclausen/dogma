@@ -8,6 +8,7 @@ pandas = "*"
 twine = "*"
 setuptools = "*"
 wheel = "*"
+dogma = {editable = true, path = "."}
 
 [dev-packages]
 dogma = {editable = true, path = "."}

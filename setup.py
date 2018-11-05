@@ -23,10 +23,11 @@ setup(
     version=__version__,
     description=DESCRIPTION,
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/griffinclausen/dogma',
     license='MIT',
     author='Griffin Clausen',
-    author_email='dogma_maintainer@gmail.com',
+    author_email='dogma.maintainer@gmail.com',
     keywords='',
     entry_points='''
         [console_scripts]

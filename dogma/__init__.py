@@ -59,6 +59,7 @@ from dogma.codons import (
 
 from dogma.oligonucleotides import (
     Oligonucleotide,
+    combine_oligonucleotides,
     reverse_complement
 )
 
