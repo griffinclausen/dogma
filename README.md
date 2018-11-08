@@ -2,11 +2,11 @@
 
 Collection of object-oriented entities related by the central dogma of biology.
 
-**d**egenerate<br>
-**o**ligonucleotide<br>
-**g**eneration and<br>
-**m**athematical<br>
-**a**ssessment<br>
+**d**egenerate  
+**o**ligonucleotide  
+**g**eneration and  
+**m**athematical  
+**a**ssessment  
 
 
 # Installation
