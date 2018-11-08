@@ -9,9 +9,7 @@ twine = "*"
 setuptools = "*"
 wheel = "*"
 dogma = {editable = true, path = "."}
-
-[dev-packages]
-dogma = {editable = true, path = "."}
+readme-renderer = "*"
 
 [requires]
 python_version = "3.7"

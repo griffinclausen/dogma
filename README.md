@@ -1,12 +1,11 @@
 # dogma
-
 Collection of object-oriented entities related by the central dogma of biology.
 
-**d**egenerate  
-**o**ligonucleotide  
-**g**eneration and  
-**m**athematical  
-**a**ssessment  
+**d** egenerate  
+**o** ligonucleotide  
+**g** eneration and  
+**m** athematical  
+**a** ssessment  
 
 
 # Installation
@@ -27,4 +26,4 @@ Collection of object-oriented entities related by the central dogma of biology.
     >> print(samples)
 
 # Contact Information
-dogma_maintainer@gmail.com
+dogma.maintainer@gmail.com
