@@ -11,7 +11,7 @@ def test_codon_selector():
 
     cs.must_exclude = ['*']
     cs.filter()
-    assert len(cs.filterd_table) == 2351
+    assert len(cs.filtered_table) == 2351
 
 
 def main():
