@@ -23,4 +23,4 @@ def test_combine_oligonucleotides():
 
     k = combine_oligonucleotides(G, T)
     assert isinstance(k, Oligonucleotide)
-    assert k == K
+    assert k.get_base_profile(rescaled=1) == K.get_base_profile(rescaled=1)

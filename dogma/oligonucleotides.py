@@ -10,7 +10,8 @@ from dogma import (
     translate,
     Nucleotide,
     Codon,
-    combine_nucleotides
+    combine_nucleotides,
+    rescale
 )
 
 
@@ -169,7 +170,7 @@ class Oligonucleotide:
         self.get_degeneracy_table()
         self.get_size()
 
-    def get_base_profile(self):
+    def get_base_profile(self, rescaled=False):
         """
         Generates and returns base profile
 
@@ -182,7 +183,10 @@ class Oligonucleotide:
              1: {'A':1, 'C':1 , 'G':1. 'T':1},
              2: {               'G':1. 'T':1}}
         """
-        self.base_profile = [b.composition for b in self.bases]
+        if rescaled:
+            self.base_profile = [rescale(b.composition) for b in self.bases]
+        else:
+            self.base_profile = [b.composition for b in self.bases]
         return self.base_profile
 
     def get_codon_profile(self):
@@ -294,7 +298,8 @@ class Oligonucleotide:
                for _ in self.amino_acid_degeneracy_profile]
 
         if not dfs:
-            self.protein_degeneracy_table = pd.DataFrame(columns=['Degeneracy', 'Proteins'])
+            self.protein_degeneracy_table = pd.DataFrame(
+                columns=['Degeneracy', 'Proteins'])
             return self.protein_degeneracy_table
 
         df = dfs[0]
