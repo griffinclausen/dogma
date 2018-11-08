@@ -8,7 +8,7 @@ here = path.abspath(path.dirname(__file__))
 
 
 DESCRIPTION = 'Collection of object-oriented entities related by the central dogma of biology.',
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
@@ -23,7 +23,6 @@ setup(
     version=__version__,
     description=DESCRIPTION,
     long_description=long_description,
-    long_description_content_type='text/markdown',
     url='https://github.com/griffinclausen/dogma',
     license='MIT',
     author='Griffin Clausen',
