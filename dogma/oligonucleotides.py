@@ -294,7 +294,7 @@ class Oligonucleotide:
                for _ in self.amino_acid_degeneracy_profile]
 
         if not dfs:
-            self.protein_degeneracy_table = pd.DataFrame()
+            self.protein_degeneracy_table = pd.DataFrame(columns=['Degeneracy', 'Proteins'])
             return self.protein_degeneracy_table
 
         df = dfs[0]
