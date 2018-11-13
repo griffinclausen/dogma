@@ -16,8 +16,16 @@ class AminoAcid:
     ++++++++++
     label - str - One letter string label denoting acid acid identity
     members - list - List of
+    proportions
+    codon_labels
+    codons
+    composition
+
     Methods
     +++++++
+    get_synonymous_codons
+    is_degenerate
+    is_equimolar
 
     """
 

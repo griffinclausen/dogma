@@ -8,7 +8,10 @@ __version__ = '0.0.8'
 here = path.abspath(path.dirname(__file__))
 
 
-DESCRIPTION = 'Collection of object-oriented entities related by the central dogma of biology.',
+DESCRIPTION = """
+Collection of object-oriented entities related by the central dogma of biology.
+""".strip()
+
 with io.open('README.rst', 'rt', encoding='utf8') as f:
     readme = f.read()
 

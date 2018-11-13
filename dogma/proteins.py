@@ -24,8 +24,19 @@ class Protein:
 
     Attributes
     ---------
-    oligonucleotide: (opt) Oligonucleotide object.
-                     If not exactly determined, consist of all possible dna
+    oligonucleotide:
+    codons
+    residues
+    label
+    length
+
+    Methods
+    -------
+    is_degenerate
+    is_equimolar
+    get_synonymous_codons
+    sample
+    samples
     """
 
     def __init__(self, data, genetic_code=None, data_is_dna=False):

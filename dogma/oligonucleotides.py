@@ -7,6 +7,7 @@ from dogma import (
     DEFAULT_DECIMAL_PRECISION,
     GeneticCode,
     DEFAULT_GENETIC_CODE,
+    NUCLEOTIDE_BASE_PAIRS,
     translate,
     Nucleotide,
     Codon,
@@ -22,6 +23,28 @@ class Oligonucleotide:
     """
     A sequence of Nucleotides objects.
     5' --> 3' list
+
+    Parameters
+    ----------
+    data
+    genetic_code
+    auto_run
+
+    Attributes
+    ----------
+    bases
+    genetic_code
+    length
+    labels
+    compact_label
+    codon_stings
+    codons
+
+    Methods
+    -------
+    get_base_profile
+    get_amino_acid_profile
+
     """
 
     def __init__(self, data, genetic_code=None, auto_run=True):
@@ -263,7 +286,7 @@ class Oligonucleotide:
         degeneracies of proteins derived from the degenerate oligonucleotide,
         and where values are the number of proteins in this group.
 
-        Dictionary values reflect number of proteins within Oligonucleotid
+        Dictionary values reflect number of proteins within Oligonucleotide
         with a given degeneracy.
 
         Usage
@@ -466,17 +489,26 @@ def combine_oligonucleotides(*oligos, proportions=None, offsets=None):
 
 def reverse_complement(oligo):
     """
+    Returns a new Oligonucleotide instance where base composition is reverse
+    complement to input oligo.
     """
-    if isinstance(oligo, Oligonucleotide):
-        oligo = oligo.label
+    pair = NUCLEOTIDE_BASE_PAIRS
+    data = [{pair[k]: v for k, v in b.composition.items()}
+            for b in oligo.bases[::-1]]
+    print(data)
+    o = Oligonucleotide(data, genetic_code=oligo.genetic_code)
+    print(o.label)
+    return o
 
-    # TODO!
+
+def test_reverse_complement(oligo_string='ACGT'):
+    o1 = Oligonucleotide(oligo_string)
+    print(o1.label)
+    print(reverse_complement(o1))
 
 
-def get_nnk(n=1):
-    """
-    Simple helper function to easily generate NNK-based oligos.
-    """
-    supE = GeneticCode(1, {'TAG': 'Q'})
-    oligo = Oligonucleotide('NNK' * n, supE)
-    return oligo
+if __name__ == '__main__':
+    test_reverse_complement()
+    test_reverse_complement('AAACCC')
+    test_reverse_complement('NNK')
+    test_reverse_complement('ATANNKAAA')
