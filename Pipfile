@@ -10,6 +10,7 @@ setuptools = "*"
 wheel = "*"
 dogma = {editable = true, path = "."}
 readme-renderer = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"

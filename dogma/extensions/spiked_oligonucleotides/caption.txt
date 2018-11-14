@@ -1,0 +1,2 @@
+Bootstrapped Mutation Profile
+Expected amino acid composition of oligonucleotides for increasing proportions of AAAAAAAAAAAA spiked into NNKNNKNNKNNK
