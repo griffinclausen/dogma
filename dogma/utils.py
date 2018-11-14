@@ -88,6 +88,16 @@ STOP_LABEL = '*'
 DEFAULT_RESIDUE_LABEL = 'X'
 
 
+def product_of_list(x):
+    """
+    Returns the product of a list.
+    """
+    tot = 1
+    for _ in x:
+        tot *= _
+    return tot
+
+
 def rescale(data, total=1):
     """
     Rescales numerical values in lists or dictionary values to sum

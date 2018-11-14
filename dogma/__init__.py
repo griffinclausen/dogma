@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"Collection of objects related by the central dogma of biology."
-
-__version__ = '0.0.1'
-name = 'dogma'
+"""
+Collection of objects related by the central dogma of biology.
+"""
 
 
 from dogma.nbci import (
@@ -32,6 +31,7 @@ from dogma.utils import (
     DEFAULT_AMINO_ACID_LABEL,
     STOP_LABEL,
     DEFAULT_RESIDUE_LABEL,
+    product_of_list,
     rescale,
     get_frequency_dictionary,
     get_random_oligonucleotide
@@ -60,7 +60,9 @@ from dogma.codons import (
 from dogma.oligonucleotides import (
     Oligonucleotide,
     combine_oligonucleotides,
-    reverse_complement
+    reverse_complement,
+    calculate_protein_degeneracy,
+    calculate_protein_quantile
 )
 
 from dogma.amino_acids import AminoAcid

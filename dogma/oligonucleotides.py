@@ -12,6 +12,7 @@ from dogma import (
     Nucleotide,
     Codon,
     combine_nucleotides,
+    product_of_list,
     rescale
 )
 
@@ -173,7 +174,7 @@ class Oligonucleotide:
         else:
             oligonucleotide_string = ''.join([b.sample() for b in self.bases])
 
-        if output == 'protein':
+        if output == 'protein' or output.lower().startswith('p'):
             return translate(oligonucleotide_string, self.genetic_code)
         elif output == 'both':
             return oligonucleotide_string, translate(oligonucleotide_string,
@@ -492,23 +493,87 @@ def reverse_complement(oligo):
     Returns a new Oligonucleotide instance where base composition is reverse
     complement to input oligo.
     """
-    pair = NUCLEOTIDE_BASE_PAIRS
-    data = [{pair[k]: v for k, v in b.composition.items()}
+    if not isinstance(oligo, Oligonucleotide):
+        oligo = Oligonucleotide(oligo)
+
+    data = [{NUCLEOTIDE_BASE_PAIRS[k]: v for k, v in b.composition.items()}
             for b in oligo.bases[::-1]]
-    print(data)
-    o = Oligonucleotide(data, genetic_code=oligo.genetic_code)
-    print(o.label)
-    return o
+    return Oligonucleotide(data, genetic_code=oligo.genetic_code)
+
+
+def calculate_protein_degeneracy(protein_string, oligo=None):
+    """
+    Returns the degeneracy of a protein within a reference oligonucleotide.
+    """
+    if not isinstance(oligo, Oligonucleotide):
+        oligo = Oligonucleotide(oligo)
+
+    return int(product_of_list([oligo.amino_acid_profile[i].get(aa, 0)
+                                for i, aa in enumerate(protein_string)]))
+
+
+def calculate_protein_quantile(protein_string, oligo=None):
+    """
+    Returns the quantile of protein within a refernce oligonucleotide.
+    """
+    degeneracy = calculate_protein_degeneracy(protein_string, oligo)
+    if degeneracy > 0:
+        return oligo.df.loc[oligo.df['Degeneracy'] == degeneracy,
+                            'Protein_Quantile'].item()
+    return -1
 
 
 def test_reverse_complement(oligo_string='ACGT'):
     o1 = Oligonucleotide(oligo_string)
+    print('Input:')
     print(o1.label)
-    print(reverse_complement(o1))
+    o2 = reverse_complement(o1)
+    print('Output:')
+    print(o2.label)
+
+
+def test_calculate_protein_degeneracy():
+    print('Testing calculate protein degeneracy')
+    supE = GeneticCode(1, {'TAG': 'Q'})
+    nnn = Oligonucleotide('NNN', supE)
+    nnk = Oligonucleotide('NNK', supE)
+    aaa = Oligonucleotide('AAA', supE)
+    nnk7 = Oligonucleotide('NNK'*7, supE)
+
+    print(calculate_protein_degeneracy('A', nnn))
+    print(calculate_protein_degeneracy('A', nnk))
+    print(calculate_protein_degeneracy('A', aaa))
+
+    print('NNK7:C7', calculate_protein_degeneracy('C'*7, nnk7))
+    print('NNK7:G7', calculate_protein_degeneracy('G'*7, nnk7))
+    print('NNK7:R7', calculate_protein_degeneracy('R'*7, nnk7))
+
+
+def test_calculate_protein_quantile():
+    print('Testing calculate protein quantile')
+    supE = GeneticCode(1, {'TAG': 'Q'})
+    nnn = Oligonucleotide('NNN', supE)
+    nnk = Oligonucleotide('NNK', supE)
+    aaa = Oligonucleotide('AAA', supE)
+    nnk7 = Oligonucleotide('NNK'*7, supE)
+
+    print(f'nnn:a: {calculate_protein_quantile("A", nnn):.3f}')
+    print(f'nnk:a: {calculate_protein_quantile("A", nnk):.3f}')
+    print(f'aaa:a: {calculate_protein_quantile("A", aaa):.3f}')
+
+    print(f'NNK7:C7: {calculate_protein_quantile("C"*7, nnk7):.3f}')
+    print(f'NNK7:G7: {calculate_protein_quantile("G"*7, nnk7):.3f}')
+    print(f'NNK7:R7: {calculate_protein_quantile("R"*7, nnk7):.3f}')
+
+
+def tests():
+    # test_reverse_complement()
+    # test_reverse_complement('AAACCC')
+    # test_reverse_complement('NNK')
+    # test_reverse_complement('ATANNKAAA')
+    test_calculate_protein_degeneracy()
+    test_calculate_protein_quantile()
 
 
 if __name__ == '__main__':
-    test_reverse_complement()
-    test_reverse_complement('AAACCC')
-    test_reverse_complement('NNK')
-    test_reverse_complement('ATANNKAAA')
+    tests()
