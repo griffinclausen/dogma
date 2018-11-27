@@ -11,3 +11,8 @@ from .spiked_oligonucleotides.utils import (
     hamming_distance,
     manhattan_distance,
     combine_bases)
+
+
+from .degenerate_codon_selection.codon_selector import (
+    CodonSelector
+)
