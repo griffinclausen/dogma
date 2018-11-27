@@ -1,4 +1,4 @@
-from dogma.extensions.codon_selection import (
+from dogma.extensions import (
     CodonOption,
     CodonSelector
 )

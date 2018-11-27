@@ -16,3 +16,7 @@ from .spiked_oligonucleotides.utils import (
 from .degenerate_codon_selection.codon_selector import (
     CodonSelector
 )
+
+from .degenerate_codon_selection.codon_option import (
+    CodonOption
+)
