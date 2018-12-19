@@ -56,6 +56,8 @@ class GeneticCode:
                         for c in updated_mappings.keys()])
             assert all([(len(a) == 1 and isinstance(a, str))
                         for a in updated_mappings.values()])
+            updated_mappings = {k.upper().replace('U', 'T'): v
+                                for k, v in updated_mappings.items()}
 
         if error_symbol is not '_':
             assert isinstance(error_symbol, str) and len(error_symbol) == 1

@@ -6,28 +6,58 @@ from dogma import (
 
 
 def test_Protein_from_amino_acid_string():
-    pass
+    aa_string = 'ACDEFGHIKLMNPQRSTVWY'
+    p = Protein(aa_string)
+    assert p.label == aa_string
 
 
 def test_Protein_from_nucleotide_string():
-    pass
+    dna_string = 'aaacccgggttt'
+    p = Protein(dna_string)
+    assert p.label == 'LPGF'
 
 
 def test_Protein_from_oligonucleotide_object():
-    pass
+    dna_string = 'aaacccgggttt'
+    oligo = Oligonucleotide(dna_string)
+    p = Protein(oligo)
+    assert p.label == 'LPGF'
 
 
-def test_Protein_from_codon_object():
-    pass
+def test_Protein_from_list_of_codon_object():
+    dna_string = 'aaa'
+    c = Codon(dna_string)
+    p = Protein(c)
+    assert p.label == 'L'
 
 
 def test_Protein_from_amino_acid_object():
-    pass
+    aa_string = 'A'
+    aa = AminoAcid(aa_string)
+    p = Protein(aa)
+    assert p.label == aa_string
 
 
 def test_Protein_from_amino_acid_list():
-    pass
+    aa_string = 'A'
+    aa = [AminoAcid(aa_string)]
+    p = Protein(aa)
+    assert p.label == aa_string
+
+    aa_string = 'ACDEFGHIKLMNPQRSTVWY'
+    aas = [AminoAcid(_) for _ in aa_string]
+    p = Protein(aas)
+    assert p.label == aa_string
 
 
 def test_Protein_from_codon_list():
-    pass
+    dna_string = 'aaa'
+    c = [Codon(dna_string)]
+    p = Protein(c)
+    assert p.label == 'L'
+
+    dna_string = 'aaacccgggttt'
+    oligo = Oligonucleotide(dna_string)
+    c = oligo.codons
+    p = Protein(c)
+    assert p.label == 'LPGF'

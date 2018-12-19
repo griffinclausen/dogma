@@ -5,6 +5,7 @@
 """Package-wide variables and helper functions."""
 
 from itertools import product
+from functools import reduce
 from random import choice
 
 
@@ -88,14 +89,15 @@ STOP_LABEL = '*'
 DEFAULT_RESIDUE_LABEL = 'X'
 
 
-def product_of_list(x):
+def product_of_list(data):
     """
     Returns the product of a list.
     """
-    tot = 1
-    for _ in x:
-        tot *= _
-    return tot
+    return reduce((lambda x, y: x * y), data)
+    # tot = 1
+    # for _ in x:
+    #     tot *= _
+    # return tot
 
 
 def rescale(data, total=1):

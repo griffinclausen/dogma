@@ -1,5 +1,4 @@
 from dogma.extensions import (
-    CodonOption,
     CodonSelector
 )
 
@@ -12,12 +11,3 @@ def test_codon_selector():
     cs.must_exclude = ['*']
     cs.filter()
     assert len(cs.filtered_table) == 2351
-
-
-def main():
-    cs = CodonSelector()
-    return cs
-
-
-if __name__ == '__main__':
-    main()

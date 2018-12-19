@@ -62,18 +62,19 @@ def test_get_frequency_dictionary_with_list_input():
 
     x = list('aaabbc')
     y = get_frequency_dictionary(x)
-    assert y == {'a': 3, 'b':2, 'c': 1}
+    assert y == {'a': 3, 'b': 2, 'c': 1}
 
     x = ['aaa', 'bbb', 'aaa', 'bbb', 'aaa', 'ccc']
     y = get_frequency_dictionary(x)
-    assert y == {'aaa': 3, 'bbb':2, 'ccc': 1}
+    assert y == {'aaa': 3, 'bbb': 2, 'ccc': 1}
+
 
 def test_get_frequency_dictionary_with_string_input():
 
     x = 'aaabbc'
     y = get_frequency_dictionary(x)
-    assert y == {'a': 3, 'b':2, 'c': 1}
+    assert y == {'a': 3, 'b': 2, 'c': 1}
 
     x = ['aaa', 'bbb', 'aaa', 'bbb', 'aaa', 'ccc']
     y = get_frequency_dictionary(x)
-    assert y == {'aaa': 3, 'bbb':2, 'ccc': 1}
+    assert y == {'aaa': 3, 'bbb': 2, 'ccc': 1}

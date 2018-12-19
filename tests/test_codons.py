@@ -48,7 +48,6 @@ def test_Codon_list_of_codon_strings():
 
 def test_Codon_list_of_nucleotides():
 
-
     o = Oligonucleotide('AAA')
     b = o.bases
     assert b[0].label == 'A'
@@ -56,7 +55,7 @@ def test_Codon_list_of_nucleotides():
     assert isinstance(b[0], Nucleotide)
     assert isinstance(b[1], Nucleotide)
     assert isinstance(b[2], Nucleotide)
-    
+
     c = Codon(b)
     assert c.label == 'AAA'
     assert len(c.composition) == 1
@@ -69,7 +68,10 @@ def test_Codon_list_of_nucleotides():
 
 
 def test_combine_codons():
-    pass
+    c1 = Codon(['AAA'])
+    c2 = Codon(['AKN'])
+    c3 = combine_codons(c1, c2)
+    assert c3.label == 'ADN'
 
 
 def test_nucleotide_string_to_codons():
@@ -78,5 +80,5 @@ def test_nucleotide_string_to_codons():
 
 
 def test_degenerate_codon_string_to_standard_members():
-    assert degenerate_codon_string_to_standard_members('NAA') == ['AAA', 'CAA', 'GAA', 'TAA']
-
+    assert degenerate_codon_string_to_standard_members('NAA') == \
+           ['AAA', 'CAA', 'GAA', 'TAA']

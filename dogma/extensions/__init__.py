@@ -20,3 +20,12 @@ from .degenerate_codon_selection.codon_selector import (
 from .degenerate_codon_selection.codon_option import (
     CodonOption
 )
+
+
+from .nonequimolar_codon_optimization import (
+    NonEquimolarOptimizer,
+    get_random_base_profile,
+    get_random_codon_profile,
+    calculate_num_base_combinations,
+    calculate_num_codon_combinations
+)

@@ -82,6 +82,7 @@ class Nucleotide:
         Various input data formats are supported:
             Nucleotide('A')
             Nucleotide({'A': 3, 'C': 1})
+            Nucleotide([50, 0, 25, 25])
         """
 
         # ex: Nucleotide('A')
@@ -96,6 +97,13 @@ class Nucleotide:
                 all([isinstance(_, (int, float)) for _ in data.values()])):
 
             composition = data
+            label = nucleotide_composition_to_letter(composition)
+
+        elif (isinstance(data, list) and
+                len(data) == 4 and
+                all([isinstance(_, (int, float)) for _ in data])):
+
+            composition = dict(zip('ACGT', data))
             label = nucleotide_composition_to_letter(composition)
 
         else:
