@@ -13,7 +13,7 @@ def test_Protein_from_amino_acid_string():
 
 def test_Protein_from_nucleotide_string():
     dna_string = 'aaacccgggttt'
-    p = Protein(dna_string)
+    p = Protein(dna_string, data_is_dna=True)
     assert p.label == 'LPGF'
 
 

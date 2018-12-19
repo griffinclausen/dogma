@@ -45,7 +45,19 @@ class Protein:
             genetic_code = DEFAULT_GENETIC_CODE
         self.genetic_code = genetic_code
 
-        if all([isinstance(_, str) for _ in data]):
+        # Protein(Oligonucleotide('NNK'))
+        if isinstance(data, Oligonucleotide):
+            self.oligonucleotide = data
+            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
+            self.residues = [AminoAcid(c.translate()) for c in self.codons]
+
+        # Protein(AminoAcid('A'))
+        elif isinstance(data, AminoAcid):
+            self.residues = [data]
+            self.oligonucleotide = None
+            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
+
+        elif all([isinstance(_, str) for _ in data]):
 
             # Protein('NNK', data_is_dna=True)
             if data_is_dna:
@@ -59,18 +71,6 @@ class Protein:
                 self.codons = [a.get_synonymous_codons(Codon)
                                for a in self.residues]
                 self.oligonucleotide = None
-
-        # Protein(Oligonucleotide('NNK'))
-        elif isinstance(data, Oligonucleotide):
-            self.oligonucleotide = data
-            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
-            self.residues = [AminoAcid(c.translate()) for c in self.codons]
-
-        # Protein(AminoAcid('A'))
-        elif isinstance(data, AminoAcid):
-            self.residues = [data]
-            self.oligonucleotide = None
-            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
 
         else:
             self.residues = []

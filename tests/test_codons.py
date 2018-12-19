@@ -69,9 +69,17 @@ def test_Codon_list_of_nucleotides():
 
 def test_combine_codons():
     c1 = Codon('AAA')
+    c3 = combine_codons(c1, c1)
+    assert c3.label == 'AAA'
+
+    c1 = Codon('AAA')
+    c3 = combine_codons(c1, c1, proportions=[1, 1])
+    assert c3.label == 'AAA'
+
+    c1 = Codon('AAA')
     c2 = Codon('AKN')
-    c3 = combine_codons(c1, c2)
-    assert c3.label == 'ADN'
+    c3 = combine_codons(c1, c2, proportions=[1, 1])
+    assert c3.label == 'Adn'
 
 
 def test_nucleotide_string_to_codons():
