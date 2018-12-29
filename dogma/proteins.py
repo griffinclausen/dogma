@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from functools import reduce
 from random import choices
 
@@ -48,21 +51,21 @@ class Protein:
         # Protein(Oligonucleotide('NNK'))
         if isinstance(data, Oligonucleotide):
             self.oligonucleotide = data
-            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
+            self.codons = self.oligonucleotide.codons
             self.residues = [AminoAcid(c.translate()) for c in self.codons]
 
         # Protein(AminoAcid('A'))
         elif isinstance(data, AminoAcid):
             self.residues = [data]
             self.oligonucleotide = None
-            self.codons = oligonucleotide_to_codons(self.oligonucleotide)
+            self.codons = None
 
         elif all([isinstance(_, str) for _ in data]):
 
             # Protein('NNK', data_is_dna=True)
             if data_is_dna:
                 self.oligonucleotide = Oligonucleotide(data, genetic_code)
-                self.codons = oligonucleotide_to_codons(self.oligonucleotide)
+                self.codons = self.oligonucleotide.codons
                 self.residues = [AminoAcid(c.translate()) for c in self.codons]
 
             # Protein('NNK')
@@ -121,7 +124,3 @@ def calculate_protein_degeneracy(protein, oligonucleotide=None):
 
     return reduce(lambda x, y: x * y, [aa_composition[aa]
                   for aa_composition, aa in zip(data, protein)],)
-
-
-def oligonucleotide_to_codons(oligo):
-    return None

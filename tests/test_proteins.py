@@ -14,21 +14,21 @@ def test_Protein_from_amino_acid_string():
 def test_Protein_from_nucleotide_string():
     dna_string = 'aaacccgggttt'
     p = Protein(dna_string, data_is_dna=True)
-    assert p.label == 'LPGF'
+    assert p.label == 'KPGF'
 
 
 def test_Protein_from_oligonucleotide_object():
     dna_string = 'aaacccgggttt'
     oligo = Oligonucleotide(dna_string)
     p = Protein(oligo)
-    assert p.label == 'LPGF'
+    assert p.label == 'KPGF'
 
 
 def test_Protein_from_list_of_codon_object():
     dna_string = 'aaa'
     c = Codon(dna_string)
     p = Protein(c)
-    assert p.label == 'L'
+    assert p.label == 'K'
 
 
 def test_Protein_from_amino_acid_object():
@@ -54,10 +54,10 @@ def test_Protein_from_codon_list():
     dna_string = 'aaa'
     c = [Codon(dna_string)]
     p = Protein(c)
-    assert p.label == 'L'
+    assert p.label == 'K'
 
     dna_string = 'aaacccgggttt'
     oligo = Oligonucleotide(dna_string)
     c = oligo.codons
     p = Protein(c)
-    assert p.label == 'LPGF'
+    assert p.label == 'KPGF'

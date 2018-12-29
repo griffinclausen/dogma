@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*-encoding=utf-8-_*-
 
-
 """Package-wide variables and helper functions."""
 
 from itertools import product
@@ -94,10 +93,6 @@ def product_of_list(data):
     Returns the product of a list.
     """
     return reduce((lambda x, y: x * y), data)
-    # tot = 1
-    # for _ in x:
-    #     tot *= _
-    # return tot
 
 
 def rescale(data, total=1):

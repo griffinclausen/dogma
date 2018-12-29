@@ -15,7 +15,7 @@ class AminoAcid:
     Attributes
     ++++++++++
     label - str - One letter string label denoting acid acid identity
-    members - list - List of
+    members - list - List of one letter symbols for nonzero amino acids
     proportions
     codon_labels
     codons
@@ -73,6 +73,20 @@ class AminoAcid:
             self.proportions = [self.composition[_] for _ in self.members]
             self.label = genetic_code[data.label]
 
+        # input data is dictionary of amino acids and their proportions
+        elif isinstance(data, dict) and \
+                all([_ in self.genetic_code.amino_acids for _ in data]) and \
+                all([isinstance(_, (int, float)) for _ in data.values()]):
+            self.codons = []
+            self.codon_labels = ['']
+            self.composition = data
+            self.members = sorted(self.composition.keys())
+            self.proportions = [self.composition[_] for _ in self.members]
+            if not self.is_degenerate():
+                self.label = f'({self.members})'
+            else:
+                self.label = f'{self.members[0]}'
+
         self.degenerate = self.is_degenerate()
         self.equimolar = self.is_equimolar()
 
@@ -99,7 +113,7 @@ class AminoAcid:
         Amino acid is degenerate if there are multiple amino acid members
         have nonzero composition values.
         """
-        return len(self.members)
+        return len(self.members) > 0
 
     def is_equimolar(self):
         """

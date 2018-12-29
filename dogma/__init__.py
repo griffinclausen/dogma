@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Collection of objects related by the central dogma of biology.
+Collection of objects and methods related to the central dogma of biology.
 """
 
 

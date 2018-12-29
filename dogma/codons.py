@@ -16,7 +16,8 @@ from dogma import (
     is_valid_nucleotide_string,
     combine_nucleotides,
     STANDARD_CODONS,
-    DEFAULT_CODON_LABEL
+    DEFAULT_CODON_LABEL,
+    rescale
 )
 
 decimal.getcontext().prec = DEFAULT_DECIMAL_PRECISION
@@ -31,7 +32,10 @@ class Codon:
         """
         Multiple input formats are acceptable
             n = Nucleotide('N')
-            Codon([n,n,n]) == Codon((n, n, n))
+
+            nnn = Codon([n,n,n])
+            nnn = Codon((n, n, n))
+            nnn = Codon('NNN')
         """
 
         if not isinstance(genetic_code, GeneticCode):
@@ -158,7 +162,6 @@ class Codon:
 
     def __str__(self):
         b0, b1, b2 = self.bases
-        # return f'Codon(\n\t{b0}\n\t{b1}\n\t{b2}\n)'
         return f'Codon(\n\t{b0}\n\t{b1}\n\t{b2})'
 
 
@@ -177,6 +180,8 @@ def combine_codons(*codons, proportions=None):
     for codon, p in zip(codons, proportions):
         for sub_codon, sub_proportion in codon.composition.items():
             data[sub_codon] += p * sub_proportion
+    data = rescale(dict(data))
+    print(data)
 
     return Codon(data, genetic_code)
 

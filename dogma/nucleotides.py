@@ -221,7 +221,7 @@ def combine_nucleotides(*nucleotides, proportions=None):
 
 def nucleotide_composition_to_letter(composition):
     """
-    Converts dictionary of {nucleotide letter: proportions} pairs
+    Converts dictionary of {nucleotide letter: proportion} pairs
     to IUPAC degenerate DNA letter.
 
     Usage:

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import decimal
 import math
 
@@ -388,7 +391,7 @@ class Oligonucleotide:
 
     def get_makowski_diversity(self):
         """
-        **INCORRECT**
+        **Needs verification**
         Calculates diversity as define by Makowski and Soares
         https://doi.org/10.1093/bioinformatics/btg013
         d = 1/(N*SUM(Pi^2))
@@ -434,10 +437,6 @@ class Oligonucleotide:
 
         degeneracy = self.degeneracy_table['Degeneracy']
         protein_counts = self.degeneracy_table['Proteins']
-
-        print(degeneracy)
-        print(protein_counts)
-        return 0
         entropy = decimal.Decimal(0)
 
         # for each degeneracy group
@@ -521,59 +520,3 @@ def calculate_protein_quantile(protein_string, oligo=None):
         return oligo.df.loc[oligo.df['Degeneracy'] == degeneracy,
                             'Protein_Quantile'].item()
     return -1
-
-
-def test_reverse_complement(oligo_string='ACGT'):
-    o1 = Oligonucleotide(oligo_string)
-    print('Input:')
-    print(o1.label)
-    o2 = reverse_complement(o1)
-    print('Output:')
-    print(o2.label)
-
-
-def test_calculate_protein_degeneracy():
-    print('Testing calculate protein degeneracy')
-    supE = GeneticCode(1, {'TAG': 'Q'})
-    nnn = Oligonucleotide('NNN', supE)
-    nnk = Oligonucleotide('NNK', supE)
-    aaa = Oligonucleotide('AAA', supE)
-    nnk7 = Oligonucleotide('NNK'*7, supE)
-
-    print(calculate_protein_degeneracy('A', nnn))
-    print(calculate_protein_degeneracy('A', nnk))
-    print(calculate_protein_degeneracy('A', aaa))
-
-    print('NNK7:C7', calculate_protein_degeneracy('C'*7, nnk7))
-    print('NNK7:G7', calculate_protein_degeneracy('G'*7, nnk7))
-    print('NNK7:R7', calculate_protein_degeneracy('R'*7, nnk7))
-
-
-def test_calculate_protein_quantile():
-    print('Testing calculate protein quantile')
-    supE = GeneticCode(1, {'TAG': 'Q'})
-    nnn = Oligonucleotide('NNN', supE)
-    nnk = Oligonucleotide('NNK', supE)
-    aaa = Oligonucleotide('AAA', supE)
-    nnk7 = Oligonucleotide('NNK'*7, supE)
-
-    print(f'nnn:a: {calculate_protein_quantile("A", nnn):.3f}')
-    print(f'nnk:a: {calculate_protein_quantile("A", nnk):.3f}')
-    print(f'aaa:a: {calculate_protein_quantile("A", aaa):.3f}')
-
-    print(f'NNK7:C7: {calculate_protein_quantile("C"*7, nnk7):.3f}')
-    print(f'NNK7:G7: {calculate_protein_quantile("G"*7, nnk7):.3f}')
-    print(f'NNK7:R7: {calculate_protein_quantile("R"*7, nnk7):.3f}')
-
-
-def tests():
-    # test_reverse_complement()
-    # test_reverse_complement('AAACCC')
-    # test_reverse_complement('NNK')
-    # test_reverse_complement('ATANNKAAA')
-    test_calculate_protein_degeneracy()
-    test_calculate_protein_quantile()
-
-
-if __name__ == '__main__':
-    tests()
