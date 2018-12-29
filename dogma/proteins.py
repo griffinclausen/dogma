@@ -48,9 +48,16 @@ class Protein:
             genetic_code = DEFAULT_GENETIC_CODE
         self.genetic_code = genetic_code
 
+
         # Protein(Oligonucleotide('NNK'))
         if isinstance(data, Oligonucleotide):
             self.oligonucleotide = data
+            self.codons = self.oligonucleotide.codons
+            self.residues = [AminoAcid(c.translate()) for c in self.codons]
+
+        # Protein(Codon('NNK'))
+        elif isinstance(data, Codon):
+            self.oligonucleotide = Oligonucleotide(data.bases, data.genetic_code)
             self.codons = self.oligonucleotide.codons
             self.residues = [AminoAcid(c.translate()) for c in self.codons]
 
@@ -59,6 +66,16 @@ class Protein:
             self.residues = [data]
             self.oligonucleotide = None
             self.codons = None
+
+        elif all([isinstance(_, AminoAcid) for _ in data]):
+            self.residues = data
+            self.oligonucleotide = None
+            self.codons = None
+
+        elif all([isinstance(_, Codon) for _ in data]):
+            self.codons = data
+            self.residues = [AminoAcid(_, _.genetic_code) for _ in data]
+            self.oligonucleotide = None
 
         elif all([isinstance(_, str) for _ in data]):
 
@@ -101,7 +118,7 @@ class Protein:
         return self.label
 
     def __repr__(self):
-        return f'Protein(label={self.label}, composition={self.composition})'
+        return f'Protein(label={self.label})'
 
 
 def calculate_protein_degeneracy(protein, oligonucleotide=None):

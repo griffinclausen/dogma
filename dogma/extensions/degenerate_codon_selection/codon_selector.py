@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 from dogma import (
     DEFAULT_GENETIC_CODE,
