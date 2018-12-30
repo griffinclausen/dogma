@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
-# from codecs import open
 import io
 from os import path
 
-__version__ = '0.0.8'
+__version__ = '1.0.1'
 
 here = path.abspath(path.dirname(__file__))
 
