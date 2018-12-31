@@ -519,4 +519,4 @@ def calculate_protein_quantile(protein_string, oligo=None):
     if degeneracy > 0:
         return oligo.df.loc[oligo.df['Degeneracy'] == degeneracy,
                             'Protein_Quantile'].item()
-    return -1
+    return 0
