@@ -8,13 +8,17 @@ from dogma.utils import (
     rescale
 )
 
-from .lite_dogma import (
+from dogma.extensions.nonequimolar_codon_optimization.lite_dogma import (
     LiteCodon,
     LiteBase
 )
 
-from .config import DEFAULTS
-from .utils import get_random_base_profile
+from dogma.extensions.nonequimolar_codon_optimization.config import (
+    DEFAULTS
+)
+from dogma.extensions.nonequimolar_codon_optimization.utils import (
+    get_random_base_profile
+)
 
 
 class NonEquimolarOptimizer:

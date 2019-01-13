@@ -7,7 +7,7 @@ from dogma.utils import (
     rescale
 )
 
-from .lite_dogma import (
+from dogma.extensions.nonequimolar_codon_optimization.lite_dogma import (
     LiteGeneticCode
 )
 

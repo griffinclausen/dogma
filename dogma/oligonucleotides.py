@@ -450,6 +450,27 @@ class Oligonucleotide:
         self.entropy = -entropy
         return self.entropy
 
+
+    def calculate_expected_sampling_coverage(self, sample_size):
+        """
+        Calculates and returns the expected fraction of DNA or Protein members
+        included within a sample of a given size.
+        """
+        one = decimal.Decimal(1)
+        decimal.getcontext().prec = 100
+
+        D = self.size_oligonucleotides
+        P = self.size_proteins
+        S = sample_size
+
+        C = decimal.Decimal(0)
+        for dna, pro in zip(self.df.Oligonucleotides, self.df.Proteins):
+            # expected number of 'samples' drawn from 'block'
+            Si = S * dna / D
+            # expected number of protein members drawn from 'block'
+            C += pro * (one - (one-one/pro) ** Si)
+        return C / P
+
     def __repr__(self):
         return f'Oligonucleotide({self.label})'
 

@@ -7,7 +7,8 @@ def get_random_base_profile(total=100, num_bases=4):
     data = []
     for _ in range(num_bases - 1):
         current_total = sum(data)
-        data.append(randint(0, total-current_total))
+        reserved = num_bases - _ - 1
+        data.append(randint(1, total-current_total-reserved))
     current_total = sum(data)
     data.append(total - current_total)
     shuffle(data)
