@@ -65,7 +65,7 @@ def test_calculate_protein_quantile():
 
     assert 0.856 < calculate_protein_quantile('A', nnn) < 0.858
     assert 0.849 < calculate_protein_quantile('A', nnk) < 0.851
-    assert calculate_protein_quantile('A', aaa) == -1
+    assert calculate_protein_quantile('A', aaa) == 0
 
     assert 0.0151 < calculate_protein_quantile('C'*7, nnk7) < 0.0153
     assert 0.969 < calculate_protein_quantile('G'*7, nnk7) < 0.971
