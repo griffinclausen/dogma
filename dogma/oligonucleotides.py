@@ -471,6 +471,12 @@ class Oligonucleotide:
             C += pro * (one - (one-one/pro) ** Si)
         return C / P
 
+    def info(self):
+        print(f'DNA Label: {self.label}')
+        print(f'Size of Library (DNA): {self.size_oligonucleotides}')
+        print(f'Size of Library (Proteins): {self.size_proteins}')
+        print(f'Average Degeneracy: {self.size_oligonucleotides/self.size_proteins}')
+
     def __repr__(self):
         return f'Oligonucleotide({self.label})'
 
