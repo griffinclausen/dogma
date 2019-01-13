@@ -472,10 +472,15 @@ class Oligonucleotide:
         return C / P
 
     def info(self):
+        if 'gini_index' not in self.__dict__.keys():
+            self.assess_degeneracy()
         print(f'DNA Label: {self.label}')
         print(f'Size of Library (DNA): {self.size_oligonucleotides}')
         print(f'Size of Library (Proteins): {self.size_proteins}')
-        print(f'Average Degeneracy: {self.size_oligonucleotides/self.size_proteins}')
+        print(f'Average Degeneracy: {self.size_oligonucleotides/self.size_proteins:.4f}')
+        print(f'Number of Degeneracy Groups: {len(self.df)}')
+        print(f'Gini index: {self.get_gini_index():.4f}')
+
 
     def __repr__(self):
         return f'Oligonucleotide({self.label})'
